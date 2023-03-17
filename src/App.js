@@ -7,7 +7,7 @@ class App extends Component {
 		super();
 
 		this.state = {
-			task: { text: "", id: uniqid() },
+			task: { text: "", id: uniqid(), number: "" },
 			tasks: [],
 		};
 	}
@@ -17,6 +17,7 @@ class App extends Component {
 			task: {
 				text: e.target.value,
 				id: this.state.task.id,
+				number: this.state.tasks.length + 1,
 			},
 		});
 	};
