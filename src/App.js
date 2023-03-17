@@ -10,6 +10,14 @@ class App extends Component {
 			task: { text: "", id: uniqid(), number: "" },
 			tasks: [],
 		};
+
+		this.handleDelete = this.handleDelete.bind(this);
+	}
+
+	handleDelete(id) {
+		this.setState({
+			tasks: this.state.tasks.filter((task) => task.id != id),
+		});
 	}
 
 	handleChange = (e) => {
@@ -45,7 +53,7 @@ class App extends Component {
 					/>
 					<button type="submit">Add Task</button>
 				</form>
-				<Overview tasks={tasks} />
+				<Overview tasks={tasks} handleDelete={this.handleDelete} />
 			</div>
 		);
 	}
