@@ -8,7 +8,7 @@ const Overview = (props) => {
 			{tasks.map((task) => {
 				return (
 					<li key={task.id}>
-						{task.text}
+						{task.taskNumber} {task.text}
 						<button onClick={() => handleDelete(task.id)}>Delete</button>
 					</li>
 				);
