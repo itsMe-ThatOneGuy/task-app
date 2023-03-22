@@ -7,16 +7,26 @@ class App extends Component {
 		super();
 
 		this.state = {
-			task: { text: "", id: uniqid(), number: "" },
+			task: { text: "", id: uniqid(), taskNumber: 0 },
 			tasks: [],
 		};
 
 		this.handleDelete = this.handleDelete.bind(this);
 	}
 
+	taskIndex(array) {
+		return array.length + 1;
+	}
+
 	handleDelete(id) {
+		let counter = 1;
+		const newTasks = this.state.tasks.filter((task) => task.id != id);
+		newTasks.forEach((task) => {
+			task.taskNumber = counter;
+			counter++;
+		});
 		this.setState({
-			tasks: this.state.tasks.filter((task) => task.id != id),
+			tasks: newTasks,
 		});
 	}
 
@@ -25,16 +35,20 @@ class App extends Component {
 			task: {
 				text: e.target.value,
 				id: this.state.task.id,
-				number: this.state.tasks.length + 1,
+				taskNumber: this.taskIndex(this.state.tasks),
 			},
 		});
 	};
 
 	onSubmitTask = (e) => {
 		e.preventDefault();
+		const tasks = this.state.tasks.concat(this.state.task);
 		this.setState({
-			tasks: this.state.tasks.concat(this.state.task),
-			task: { text: "", id: uniqid() },
+			tasks: tasks,
+			task: {
+				text: "",
+				id: uniqid(),
+			},
 		});
 	};
 
