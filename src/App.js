@@ -12,6 +12,10 @@ const App = () => {
 	const [taskList, setTaskList] = useState([]);
 	const [showForm, setShowForm] = useState(false);
 
+	const addToTaskList = (obj) => {
+		setTaskList([...taskList, obj]);
+	};
+
 	const handleButtonClick = () => {
 		!showForm ? setShowForm(true) : setShowForm(false);
 	};
