@@ -1,7 +1,37 @@
-import React, { Component } from "react";
+import { useState } from "react";
 import uniqid from "uniqid";
 import Overview from "./components/Overview";
 
+const App = () => {
+	const [task, setTask] = useState({
+		text: "",
+		id: uniqid(),
+		taskNumber: 0,
+	});
+	const [taskList, setTaskList] = useState([]);
+	const [showForm, setShowForm] = useState(false);
+
+	const handleButtonClick = () => {
+		!showForm ? setShowForm(true) : setShowForm(false);
+	};
+
+	return (
+		<div className="App">
+			<div>
+				<button
+					onClick={() => {
+						handleButtonClick();
+					}}>
+					Add Task
+				</button>
+			</div>
+		</div>
+	);
+};
+
+export default App;
+
+/*
 class App extends Component {
 	constructor() {
 		super();
@@ -74,3 +104,4 @@ class App extends Component {
 }
 
 export default App;
+*/
