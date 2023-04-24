@@ -1,6 +1,7 @@
 import { useState } from "react";
 import uniqid from "uniqid";
 import Overview from "./components/Overview";
+import TaskForm from "./components/TaskForm";
 
 const App = () => {
 	const [task, setTask] = useState({
@@ -17,13 +18,15 @@ const App = () => {
 
 	return (
 		<div className="App">
-			<div>
+			<div className="form-container">
 				<button
+					className="form-button"
 					onClick={() => {
 						handleButtonClick();
 					}}>
 					Add Task
 				</button>
+				{showForm ? <TaskForm task={task} /> : null}
 			</div>
 		</div>
 	);
