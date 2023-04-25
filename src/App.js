@@ -1,14 +1,8 @@
 import { useState } from "react";
-import uniqid from "uniqid";
 import Overview from "./components/Overview";
 import TaskForm from "./components/TaskForm";
 
 const App = () => {
-	const [task, setTask] = useState({
-		text: "",
-		id: uniqid(),
-		taskNumber: 0,
-	});
 	const [taskList, setTaskList] = useState([]);
 	const [showForm, setShowForm] = useState(false);
 
@@ -36,7 +30,6 @@ const App = () => {
 				</button>
 				{showForm ? (
 					<TaskForm
-						task={task}
 						addToTaskList={addToTaskList}
 						handleButtonClick={handleButtonClick}
 					/>
