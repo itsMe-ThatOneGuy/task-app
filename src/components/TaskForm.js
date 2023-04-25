@@ -9,9 +9,18 @@ const TaskForm = (props) => {
 		});
 	};
 
+	const onSubmitTask = () => {
+		props.addToTaskList(buffer);
+		props.handleButtonClick();
+	};
+
 	return (
 		<div>
-			<form>
+			<form
+				onSubmit={(e) => {
+					e.preventDefault();
+					onSubmitTask();
+				}}>
 				<label htmlFor="taskInput">Task</label>
 				<input
 					onChange={(e) => {
@@ -19,6 +28,7 @@ const TaskForm = (props) => {
 					}}
 					type="text"
 					value={buffer.text}></input>
+				<button type="submit">Submit</button>
 			</form>
 		</div>
 	);
