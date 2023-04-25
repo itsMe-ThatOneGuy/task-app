@@ -16,6 +16,10 @@ const App = () => {
 		setTaskList([...taskList, obj]);
 	};
 
+	const updateTaskList = (array) => {
+		setTaskList(array);
+	};
+
 	const handleButtonClick = () => {
 		!showForm ? setShowForm(true) : setShowForm(false);
 	};
@@ -30,7 +34,16 @@ const App = () => {
 					}}>
 					Add Task
 				</button>
-				{showForm ? <TaskForm task={task} /> : null}
+				{showForm ? (
+					<TaskForm
+						task={task}
+						addToTaskList={addToTaskList}
+						handleButtonClick={handleButtonClick}
+					/>
+				) : null}
+			</div>
+			<div className="task-list-container">
+				<Overview taskList={taskList} />
 			</div>
 		</div>
 	);
