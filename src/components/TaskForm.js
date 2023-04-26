@@ -1,7 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import uniqid from "uniqid";
 
 const TaskForm = (props) => {
-	const [buffer, setBuffer] = useState({ ...props.task });
+	const [buffer, setBuffer] = useState({
+		text: "",
+		id: uniqid(),
+		taskNumber: 0,
+	});
+
+	const loadBuffer = () => {
+		if (props.editing) {
+			setBuffer({ ...props.task });
+		}
+	};
+
+	useEffect(() => {
+		loadBuffer();
+	}, []);
 
 	const handleChange = (key, value) => {
 		setBuffer((buffer) => {
@@ -10,8 +25,10 @@ const TaskForm = (props) => {
 	};
 
 	const onSubmitTask = () => {
-		props.addToTaskList(buffer);
-		props.handleButtonClick();
+		if (!props.editing) {
+			props.addToTaskList(buffer);
+			props.handleButtonClick();
+		}
 	};
 
 	return (
