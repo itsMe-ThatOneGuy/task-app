@@ -24,10 +24,20 @@ const TaskForm = (props) => {
 		});
 	};
 
+	const injectEdit = () => {
+		let taskList = [...props.taskList];
+		const index = taskList.findIndex((e) => e.id === props.task.id);
+		taskList.splice(index, 1, buffer);
+		props.updateTaskList(taskList);
+	};
+
 	const onSubmitTask = () => {
 		if (!props.editing) {
 			props.addToTaskList(buffer);
 			props.handleButtonClick();
+		}
+		if (props.editing) {
+			injectEdit();
 		}
 	};
 
