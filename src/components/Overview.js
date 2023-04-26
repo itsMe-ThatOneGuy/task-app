@@ -1,15 +1,27 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import TaskForm from "./TaskForm";
 
 const Overview = (props) => {
-	const { tasks, handleDelete } = props;
+	const [editing, setEdit] = useState(true);
+
+	const handleEditButtonClick = () => {
+		!editing ? setEdit(true) : setEdit(false);
+	};
 
 	return (
 		<ul>
-			{tasks.map((task) => {
+			{props.taskList.map((task) => {
 				return (
 					<li key={task.id}>
-						{task.taskNumber} {task.text}
-						<button onClick={() => handleDelete(task.id)}>Delete</button>
+						<div>
+							{task.taskNumber} {task.text}
+							<button onClick={() => console.log(test)}>
+								Delete
+							</button>
+							<button onClick={() => handleEditButtonClick}>
+								Edit
+							</button>
+						</div>
 					</li>
 				);
 			})}
