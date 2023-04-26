@@ -15,9 +15,7 @@ const Overview = (props) => {
 					<li key={task.id}>
 						<div>
 							{task.taskNumber} {task.text}
-							<button onClick={() => console.log(test)}>
-								Delete
-							</button>
+							<button>Delete</button>
 							<button onClick={() => handleEditButtonClick}>
 								Edit
 							</button>
