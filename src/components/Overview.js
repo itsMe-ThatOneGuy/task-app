@@ -3,11 +3,6 @@ import TaskForm from "./TaskForm";
 
 const Overview = (props) => {
 	const [editing, setEdit] = useState(true);
-
-	const handleEditButtonClick = () => {
-		!editing ? setEdit(true) : setEdit(false);
-	};
-
 	return (
 		<ul>
 			{props.taskList.map((task) => {
@@ -16,9 +11,7 @@ const Overview = (props) => {
 						<div>
 							{task.taskNumber} {task.text}
 							<button>Delete</button>
-							<button onClick={() => handleEditButtonClick}>
-								Edit
-							</button>
+							<button>Edit</button>
 						</div>
 					</li>
 				);
