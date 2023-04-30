@@ -1,42 +1,76 @@
 import { useState } from "react";
+import uniqid from "uniqid";
 import Overview from "./components/Overview";
 import TaskForm from "./components/TaskForm";
 
 const App = () => {
+	const [defaultTask, setDefaultTask] = useState({});
 	const [taskList, setTaskList] = useState([]);
 	const [showForm, setShowForm] = useState(false);
+	const [editing, setEditing] = useState(false);
+	const [viewing, setViewing] = useState(false);
+
+	const getIndexOfObj = (key) => {
+		return taskList.findIndex((obj) => obj.id === key.id);
+	};
 
 	const addToTaskList = (obj) => {
-		setTaskList([...taskList, obj]);
+		let array = [...taskList];
+		if (taskList.some((element) => element.id === obj.id)) {
+			setTaskList(array.splice(getIndexOfObj(obj), 1, obj));
+		} else {
+			setTaskList([...taskList, obj]);
+		}
 	};
 
 	const updateTaskList = (array) => {
 		setTaskList(array);
 	};
 
-	const handleButtonClick = () => {
+	const handleAddButtonClick = () => {
+		setDefaultTask({ text: "", id: uniqid(), taskNumber: 0 });
 		!showForm ? setShowForm(true) : setShowForm(false);
+	};
+
+	const handleEditButtonClick = () => {
+		if (showForm) {
+			return;
+		} else {
+			!editing ? setEditing(true) : setEditing(false);
+		}
 	};
 
 	return (
 		<div className="App">
+			<button
+				onClick={() => {
+					console.log(taskList);
+				}}>
+				test
+			</button>
 			<div className="form-container">
 				<button
 					className="form-button"
 					onClick={() => {
-						handleButtonClick();
+						handleAddButtonClick();
 					}}>
 					Add Task
 				</button>
 				{showForm ? (
 					<TaskForm
+						task={defaultTask}
 						addToTaskList={addToTaskList}
-						handleButtonClick={handleButtonClick}
+						handleAddButtonClick={handleAddButtonClick}
 					/>
 				) : null}
 			</div>
 			<div className="task-list-container">
-				<Overview taskList={taskList} />
+				<Overview
+					taskList={taskList}
+					handleEditButtonClick={handleEditButtonClick}
+					viewing={viewing}
+					editing={editing}
+				/>
 			</div>
 		</div>
 	);
