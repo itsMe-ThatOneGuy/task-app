@@ -65,12 +65,21 @@ const App = () => {
 				) : null}
 			</div>
 			<div className="task-list-container">
-				<Overview
-					taskList={taskList}
-					handleEditButtonClick={handleEditButtonClick}
-					viewing={viewing}
-					editing={editing}
-				/>
+				<ul>
+					{taskList.map((task) => {
+						return (
+							<li key={task.id}>
+								<Overview
+									task={task}
+									handleEditButtonClick={
+										handleEditButtonClick
+									}
+									viewing={viewing}
+								/>
+							</li>
+						);
+					})}
+				</ul>
 			</div>
 		</div>
 	);
